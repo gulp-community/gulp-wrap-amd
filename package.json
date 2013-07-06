@@ -1,0 +1,27 @@
+{
+  "name": "gulp-wrap-amd",
+  "version": "0.0.1",
+  "description": "Wrap files with an AMD wrapper",
+  "keywords": [
+    "gulpplugin"
+  ],
+  "repository": "https://github.com/phated/gulp-wrap-amd.git",
+  "author": "Blaine Bublitz <blaine@iceddev.com>",
+  "dependencies": {
+    "event-stream": "~3.0.15",
+    "lodash": "~1.3.1",
+    "clone": "~0.1.9"
+  },
+  "main": "index.js",
+  "engines": {
+    "node": ">= 0.8"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "devDependencies": {
+    "mocha": "~1.12.0",
+    "chai": "~1.7.2",
+    "gulp": "~0.0.5"
+  }
+}
