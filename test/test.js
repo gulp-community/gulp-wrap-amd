@@ -25,9 +25,8 @@ describe('gulp-wrap-amd compilation', function(){
         exports: null,
         contents: null
       });
-      var testFilename = options.filename || filename;
       return es.map(function(file){
-        options.contents = fs.readFileSync(testFilename, 'utf-8');
+        options.contents = fs.readFileSync(file.path, 'utf-8');
         var expected = _.template(jst, options);
         expect(expected).to.equal(String(file.contents));
         done();
@@ -35,13 +34,13 @@ describe('gulp-wrap-amd compilation', function(){
     }
 
     it('should wrap a function in simple AMD wrapper', function(done){
-      gulp.file(filename)
+      gulp.src(filename)
         .pipe(task())
         .pipe(expectStream(done));
     });
 
     it('should wrap a function in simple AMD wrapper if missing deps but has params', function(done){
-      gulp.file(filename)
+      gulp.src(filename)
         .pipe(task({
           params: ['jade']
         }))
@@ -49,7 +48,7 @@ describe('gulp-wrap-amd compilation', function(){
     });
 
     it('should wrap a function in AMD wrapper with custom deps and params', function(done){
-      gulp.file(filename)
+      gulp.src(filename)
         .pipe(task({
           deps: ['jade'],
           params: ['jade']
@@ -61,7 +60,7 @@ describe('gulp-wrap-amd compilation', function(){
     });
 
     it('should wrap a function in AMD wrapper with custom deps', function(done){
-      gulp.file(filename)
+      gulp.src(filename)
         .pipe(task({
           deps: ['domReady!']
         }))
@@ -71,7 +70,7 @@ describe('gulp-wrap-amd compilation', function(){
     });
 
     it('should wrap a function in AMD wrapper with custom return variable', function(done){
-      gulp.file(exportFilename)
+      gulp.src(exportFilename)
         .pipe(task({
           exports: 'helloWorld',
           filename: exportFilename
@@ -80,6 +79,24 @@ describe('gulp-wrap-amd compilation', function(){
           exports: 'helloWorld',
           filename: exportFilename
         }));
+    });
+
+    it('should isolate the contets of the individual files', function (done) {
+      var count = 0;
+      var callback = function () {
+        if (++count === 2) {
+          done();
+        }
+      };
+
+      gulp.src(path.join(__dirname, './fixtures/test-*.js'))
+        .pipe(task({
+          deps: ['test']
+        }))
+        .pipe(expectStream(callback, {
+          deps: ['test']
+        }));
+      
     });
 
   });

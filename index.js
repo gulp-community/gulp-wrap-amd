@@ -9,9 +9,8 @@ var tmpl = _.template(jst);
 module.exports = function(options) {
 	'use strict';
 
-	var opts = options ? clone(options) : {};
-
 	function wrap(file, callback) {
+    var opts = options ? clone(options) : {};
 		var newFile = clone(file);
 
 		var result = tmpl(_.defaults(opts, {
@@ -21,6 +20,7 @@ module.exports = function(options) {
 			contents: String(newFile.contents)
 		}));
 		newFile.contents = new Buffer(result);
+
 
 		callback(null, newFile);
 	}
