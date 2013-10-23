@@ -4,6 +4,7 @@ var fs = require('fs');
 var path = require('path');
 var _ = require('lodash');
 var jst = fs.readFileSync(path.join(__dirname, './templates/amd.jst'), 'utf-8');
+var tmpl = _.template(jst);
 
 module.exports = function(options) {
 	'use strict';
@@ -12,7 +13,7 @@ module.exports = function(options) {
     var opts = options ? clone(options) : {};
 		var newFile = clone(file);
 
-		var result = _.template(jst, _.defaults(opts, {
+		var result = tmpl(_.defaults(opts, {
 			deps: null,
 			params: null,
 			exports: null,
