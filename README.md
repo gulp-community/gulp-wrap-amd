@@ -26,7 +26,7 @@ var wrap = require('gulp-wrap-amd');
 gulp.task('wrap', function() {
   gulp.src('./lib/*.js')
     .pipe(wrap())
-    .pipe(gulp.folder('./dist/'))
+    .pipe(gulp.dest('./dist/'))
 });
 ```
 
@@ -42,7 +42,7 @@ gulp.task('wrap', function() {
       params: ['jade'], // params for callback
       exports: 'jade' // variable to return
     }))
-    .pipe(gulp.folder('./dist/'))
+    .pipe(gulp.dest('./dist/'))
 });
 ```
 
