@@ -9,8 +9,7 @@
   "author": "Blaine Bublitz <blaine@iceddev.com>",
   "dependencies": {
     "event-stream": "~3.0.15",
-    "lodash": "~1.3.1",
-    "clone": "~0.1.9"
+    "lodash": "~2.2.1"
   },
   "main": "index.js",
   "engines": {
