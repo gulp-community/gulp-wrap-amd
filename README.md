@@ -24,7 +24,7 @@ Wrap the contents of the file, AMD module will return the entire contents
 var wrap = require('gulp-wrap-amd');
 
 gulp.task('wrap', function() {
-  gulp.files('./lib/*.js')
+  gulp.src('./lib/*.js')
     .pipe(wrap())
     .pipe(gulp.folder('./dist/'))
 });
@@ -36,7 +36,7 @@ Wrap the contents, with custom dependencies, callback params, and variable to re
 var wrap = require('gulp-wrap-amd');
 
 gulp.task('wrap', function() {
-  gulp.files('./lib/*.js')
+  gulp.src('./lib/*.js')
     .pipe(wrap({
       deps: ['jade'], // dependency array
       params: ['jade'], // params for callback
