@@ -1,23 +1,45 @@
+'use strict';
+
 var es = require('event-stream');
-var fs = require('fs');
-var path = require('path');
-var _ = require('lodash');
-var jst = fs.readFileSync(path.join(__dirname, './templates/amd.jst'), 'utf-8');
-var tmpl = _.template(jst);
+var clone = require('lodash').clone;
+var defaults = require('lodash').defaults;
+var isStream = require('gulp-util').isStream;
+var isBuffer = require('gulp-util').isBuffer;
 
-module.exports = function(options) {
-  'use strict';
+var tmpl = require('./template').amd;
 
-  function wrap(file, callback) {
-    var opts = options ? _.cloneDeep(options) : {};
+function compile(contents, opts){
+  opts.contents = contents;
+  return tmpl(opts);
+}
 
-    var result = tmpl(_.defaults(opts, {
-      deps: null,
-      params: null,
-      exports: null,
-      contents: String(file.contents)
-    }));
-    file.contents = new Buffer(result);
+function getOptions(file, opts){
+  return defaults(clone(opts) || {}, {
+    deps: null,
+    params: null,
+    exports: null,
+    file: file
+  });
+}
+
+module.exports = function(options){
+
+  function wrap(file, callback){
+    var opts = getOptions(file, options);
+
+    if(isStream(file.contents)){
+      var throughStream = es.through();
+      var waitStream = es.wait(function(err, data){
+        throughStream.write(compile(data, opts));
+        throughStream.end();
+      });
+      file.contents.pipe(waitStream);
+      file.contents = throughStream;
+    }
+
+    if(isBuffer(file.contents)){
+      file.contents = new Buffer(compile(String(file.contents), opts));
+    }
 
     callback(null, file);
   }
