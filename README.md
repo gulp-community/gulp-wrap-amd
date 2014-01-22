@@ -38,9 +38,10 @@ var wrap = require('gulp-wrap-amd');
 gulp.task('wrap', function() {
   gulp.src('./lib/*.js')
     .pipe(wrap({
-      deps: ['jade'], // dependency array
-      params: ['jade'], // params for callback
-      exports: 'jade' // variable to return
+      deps: ['jade'],          // dependency array
+      params: ['jade'],        // params for callback
+      exports: 'jade',         // variable to return
+      moduleRoot: 'templates/' // include a module name in the define() call, relative to moduleRoot
     }))
     .pipe(gulp.dest('./dist/'))
 });

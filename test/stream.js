@@ -20,7 +20,8 @@ var expected = _.template(jst, {
   deps: null,
   params: null,
   exports: null,
-  contents: fs.readFileSync(filePath)
+  contents: fs.readFileSync(filePath),
+  name: null
 });
 
 var file = new gutil.File({

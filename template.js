@@ -29,6 +29,8 @@
     function print() { __p += __j.call(arguments, '') }
     with (obj) {
     __p += 'define(' +
+    ((__t = ( name ? JSON.stringify(name) + ',' : '' )) == null ? '' : __t) +
+    '' +
     ((__t = ( deps ? JSON.stringify(deps) + ',' : '' )) == null ? '' : __t) +
     'function(' +
     ((__t = ( (!deps ? ['require', 'exports', 'module'] : params || '').toString() )) == null ? '' : __t) +
