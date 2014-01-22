@@ -18,7 +18,8 @@ function expectStream(t, options){
     deps: null,
     params: null,
     exports: null,
-    contents: null
+    contents: null,
+    name: null
   });
   return es.map(function(file){
     options.contents = fs.readFileSync(file.path, 'utf-8');
@@ -92,5 +93,37 @@ test('should isolate the contents of the individual files', function(t){
     }))
     .pipe(expectStream(t, {
       deps: ['test']
+    }));
+});
+
+test('should include module name if moduleRoot option is given', function(t) {
+  t.plan(1);
+  
+  gulp.src(filename)
+    .pipe(task({
+      moduleRoot: './',
+      deps: ['jade'],
+      params: ['jade'],
+    }))
+    .pipe(expectStream(t, {
+      deps: ['jade'],
+      params: ['jade'],
+      name: 'fixtures/helloworld'
+    }));
+});
+
+test('module name should be relative to moduleRoot', function(t) {
+  t.plan(1);
+  
+  gulp.src(filename)
+    .pipe(task({
+      moduleRoot: 'fixtures/',
+      deps: ['jade'],
+      params: ['jade'],
+    }))
+    .pipe(expectStream(t, {
+      deps: ['jade'],
+      params: ['jade'],
+      name: 'helloworld'
     }));
 });

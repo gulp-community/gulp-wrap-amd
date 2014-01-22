@@ -5,10 +5,15 @@ var clone = require('lodash').clone;
 var defaults = require('lodash').defaults;
 var isStream = require('gulp-util').isStream;
 var isBuffer = require('gulp-util').isBuffer;
+var path = require('path');
 
 var tmpl = require('./template').amd;
 
 function compile(contents, opts){
+  opts.name = typeof opts.moduleRoot == 'string'
+    ? path.relative(opts.moduleRoot, opts.file.path).slice(0, -path.extname(opts.file.path).length)
+    : null;
+    
   opts.contents = contents;
   return tmpl(opts);
 }
@@ -18,7 +23,8 @@ function getOptions(file, opts){
     deps: null,
     params: null,
     exports: null,
-    file: file
+    file: file,
+    moduleRoot: null
   });
 }
 

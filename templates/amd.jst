@@ -1,4 +1,4 @@
-define(<%= deps ? JSON.stringify(deps) + ',' : '' %>function(<%= (!deps ? ['require', 'exports', 'module'] : params || '').toString() %>){
+define(<%= name ? JSON.stringify(name) + ',' : '' %><%= deps ? JSON.stringify(deps) + ',' : '' %>function(<%= (!deps ? ['require', 'exports', 'module'] : params || '').toString() %>){
 <% if(exports){ %>
 <%= contents %>
 return <%= exports %>;
