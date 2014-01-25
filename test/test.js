@@ -4,7 +4,7 @@ var test = require('tap').test;
 
 var gulp = require('gulp');
 var task = require('../');
-var es = require('event-stream');
+var through = require('through2');
 var path = require('path');
 var fs = require('fs');
 var _ = require('lodash');
@@ -21,10 +21,11 @@ function expectStream(t, options){
     contents: null,
     name: null
   });
-  return es.map(function(file){
+  return through.obj(function(file, enc, cb){
     options.contents = fs.readFileSync(file.path, 'utf-8');
     var expected = _.template(jst, options);
     t.equals(expected, String(file.contents));
+    cb();
   });
 }
 
@@ -98,7 +99,7 @@ test('should isolate the contents of the individual files', function(t){
 
 test('should include module name if moduleRoot option is given', function(t) {
   t.plan(1);
-  
+
   gulp.src(filename)
     .pipe(task({
       moduleRoot: './',
@@ -114,7 +115,7 @@ test('should include module name if moduleRoot option is given', function(t) {
 
 test('module name should be relative to moduleRoot', function(t) {
   t.plan(1);
-  
+
   gulp.src(filename)
     .pipe(task({
       moduleRoot: 'fixtures/',

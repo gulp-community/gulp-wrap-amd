@@ -1,19 +1,19 @@
 'use strict';
 
-var es = require('event-stream');
+var through = require('through2');
 var clone = require('lodash').clone;
 var defaults = require('lodash').defaults;
-var isStream = require('gulp-util').isStream;
-var isBuffer = require('gulp-util').isBuffer;
 var path = require('path');
+var PluginError = require('gulp-util').PluginError;
 
 var tmpl = require('./template').amd;
 
 function compile(contents, opts){
-  opts.name = typeof opts.moduleRoot == 'string'
-    ? path.relative(opts.moduleRoot, opts.file.path).slice(0, -path.extname(opts.file.path).length)
-    : null;
-    
+  opts.name = null;
+  if(typeof opts.moduleRoot === 'string'){
+    opts.name = path.relative(opts.moduleRoot, opts.file.path).slice(0, -path.extname(opts.file.path).length);
+  }
+
   opts.contents = contents;
   return tmpl(opts);
 }
@@ -30,25 +30,21 @@ function getOptions(file, opts){
 
 module.exports = function(options){
 
-  function wrap(file, callback){
+  function WrapAMD(file, enc, cb){
     var opts = getOptions(file, options);
 
-    if(isStream(file.contents)){
-      var throughStream = es.through();
-      var waitStream = es.wait(function(err, data){
-        throughStream.write(compile(data, opts));
-        throughStream.end();
-      });
-      file.contents.pipe(waitStream);
-      file.contents = throughStream;
+    if(file.isStream()){
+      this.emit('error', new PluginError('gulp-wrap-amd', 'Streaming not supported'));
+      return cb();
     }
 
-    if(isBuffer(file.contents)){
+    if(file.isBuffer()){
       file.contents = new Buffer(compile(String(file.contents), opts));
     }
 
-    callback(null, file);
+    this.push(file);
+    cb();
   }
 
-  return es.map(wrap);
+  return through.obj(WrapAMD);
 };

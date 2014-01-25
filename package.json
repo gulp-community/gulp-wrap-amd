@@ -10,13 +10,13 @@
   "repository": "https://github.com/phated/gulp-wrap-amd.git",
   "author": "Blaine Bublitz <blaine@iceddev.com>",
   "dependencies": {
-    "event-stream": "~3.0.15",
-    "gulp-util": "~2.1.2",
-    "lodash": "~2.4.1"
+    "gulp-util": "~2.2",
+    "lodash": "~2.4.1",
+    "through2": "~0.4.1"
   },
   "main": "index.js",
   "engines": {
-    "node": ">= 0.8"
+    "node": ">= 0.10"
   },
   "scripts": {
     "test": "tap ./test/*.js",
@@ -25,6 +25,6 @@
   "devDependencies": {
     "tap": "~0.4.6",
     "lodash-cli": "~2.4.1",
-    "gulp": "~3.1.4"
+    "gulp": "~3.5.0"
   }
 }
