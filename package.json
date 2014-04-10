@@ -24,8 +24,11 @@
   },
   "devDependencies": {
     "tap": "~0.4.6",
+    "lodash": "~2.4.1",
     "lodash-cli": "~2.4.1",
     "gulp": "~3.5.0",
-    "gulp-jshint": "~1.3.4"
+    "gulp-jshint": "~1.3.4",
+    "gulp-util": "~2.2.14",
+    "through2": "~0.4.1"
   }
 }
