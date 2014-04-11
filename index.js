@@ -8,10 +8,26 @@ var PluginError = require('gulp-util').PluginError;
 
 var tmpl = require('./template').amd;
 
-function compile(contents, opts){
+function isFunction(fn) {
+  return Object.prototype.toString.call(fn) === '[object Function]'
+}
+
+function compile(contents, opts) {
   opts.name = null;
   if(typeof opts.moduleRoot === 'string'){
     opts.name = path.relative(opts.moduleRoot, opts.file.path).slice(0, -path.extname(opts.file.path).length);
+  }
+
+  if (isFunction(opts.deps)){
+    opts.deps = opts.deps.call(opts, opts.file.path);
+  }
+
+  if (isFunction(opts.params)){
+    opts.params = opts.params.call(opts, opts.file.path);
+  }
+    
+  if (isFunction(opts.exports)){
+    opts.params = opts.exports.call(opts, opts.file.path);
   }
 
   opts.contents = contents;
