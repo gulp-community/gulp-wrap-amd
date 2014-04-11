@@ -8,13 +8,28 @@ var PluginError = require('gulp-util').PluginError;
 
 var tmpl = require('./template').amd;
 
-function compile(contents, opts){
-  opts.name = null;
-  if(typeof opts.moduleRoot === 'string'){
-    opts.name = path.relative(opts.moduleRoot, opts.file.path).slice(0, -path.extname(opts.file.path).length);
-  }
+function compile(file, opts){
+  // Based on the approach taken by gulp-es6-module-transpiler.
+  var name,
+    ext = path.extname(opts.file.path),
+    method,
+    contents,
+    compiler;
 
-  opts.contents = contents;
+  if (opts.anonymous) {
+    name = '';
+  } else if (typeof opts.name === 'string') {
+    name = opts.moduleName;
+  } else {
+    name = path.relative(opts.moduleRoot || '', opts.file.path).slice(0, -path.extname(opts.file.path).length);
+
+    if (opts.name) {
+      name = opts.name(name, file);
+    }
+  }
+  opts.name = name;
+
+  opts.contents = file;
   return tmpl(opts);
 }
 

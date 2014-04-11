@@ -128,3 +128,19 @@ test('module name should be relative to moduleRoot', function(t) {
       name: 'helloworld'
     }));
 });
+
+test('should be possible to provide a custom name', function(t) {
+  t.plan(1);
+
+  gulp.src(filename)
+    .pipe(task({
+      name: 'foo/bar/helloworld',
+      deps: ['jade'],
+      params: ['jade'],
+    }))
+    .pipe(expectStream(t, {
+      deps: ['jade'],
+      params: ['jade'],
+      name: 'foo/bar/helloworld'
+    }));
+});
