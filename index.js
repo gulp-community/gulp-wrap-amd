@@ -27,7 +27,7 @@ function compile(contents, opts) {
   }
     
   if (isFunction(opts.exports)){
-    opts.params = opts.exports.call(opts, opts.file.path);
+    opts.exports = opts.exports.call(opts, opts.file.path);
   }
 
   opts.contents = contents;
