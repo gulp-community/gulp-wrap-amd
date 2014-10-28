@@ -1,7 +1,4 @@
 define(<%= name ? JSON.stringify(name) + ',' : '' %><%= deps ? JSON.stringify(deps) + ',' : '' %>function(<%= (!deps ? ['require', 'exports', 'module'] : params || '').toString() %>){
-//<%=exports%>
-//<%=toReturn%>
-
 <% if(exports && !unreturn){ %>
 <%= contents %>
 return <%= exports %>;
