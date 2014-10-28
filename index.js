@@ -24,7 +24,8 @@ function getOptions(file, opts){
     params: null,
     exports: null,
     file: file,
-    moduleRoot: null
+    moduleRoot: null,
+    void: false
   });
 }
 
