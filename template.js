@@ -34,17 +34,25 @@
     ((__t = ( deps ? JSON.stringify(deps) + ',' : '' )) == null ? '' : __t) +
     'function(' +
     ((__t = ( (!deps ? ['require', 'exports', 'module'] : params || '').toString() )) == null ? '' : __t) +
-    '){\n';
-     if(exports){
+    '){\n//' +
+    ((__t = (exports)) == null ? '' : __t) +
+    '\n//' +
+    ((__t = (toReturn)) == null ? '' : __t) +
+    '\n\n';
+     if(exports && !unreturn){
     __p += '\n' +
     ((__t = ( contents )) == null ? '' : __t) +
     '\nreturn ' +
     ((__t = ( exports )) == null ? '' : __t) +
     ';\n';
-     } else {
+     } else if(!unreturn && exports) {
     __p += '\nreturn ' +
     ((__t = ( contents )) == null ? '' : __t) +
     ';\n';
+     } else if(unreturn) {
+    __p += '\n' +
+    ((__t = ( contents )) == null ? '' : __t) +
+    '\n';
      }
     __p += '\n});\n';
 
