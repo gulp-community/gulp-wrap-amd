@@ -136,11 +136,11 @@ test('modulePrefix option requires moduleRoot existence', function(t) {
     .pipe(task({
       modulePrefix: 'rocks/',
       deps: ['jade'],
-      params: ['jade'],
+      params: ['jade']
     }))
     .pipe(expectStream(t, {
       deps: ['jade'],
-      params: ['jade'],
+      params: ['jade']
     }));
 });
 
@@ -152,7 +152,7 @@ test('should prepend the modulePrefix in the module name defination', function(t
       moduleRoot: 'fixtures/',
       modulePrefix: 'rocks/',
       deps: ['jade'],
-      params: ['jade'],
+      params: ['jade']
     }))
     .pipe(expectStream(t, {
       deps: ['jade'],
