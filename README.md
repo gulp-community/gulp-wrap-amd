@@ -41,7 +41,23 @@ gulp.task('wrap', function() {
       deps: ['jade'],          // dependency array
       params: ['jade'],        // params for callback
       exports: 'jade',         // variable to return
-      moduleRoot: 'templates/' // include a module name in the define() call, relative to moduleRoot
+      moduleRoot: 'templates/', // include a module name in the define() call, relative to moduleRoot
+      modulePrefix: 'rocks/'  // optional, prefix of the module name. It depends on existance of `moduleRoot`
+    }))
+    .pipe(gulp.dest('./dist/'))
+});
+```
+
+Custom module name definition with optional prefix value
+
+```javascript
+var wrap = require('gulp-wrap-amd');
+
+gulp.task('wrap', function() {
+  gulp.src('client/app/templates/app.hbs')
+    .pipe(wrap({
+      moduleRoot: 'client/app/', // define the root of module path. Required before using `modulePrefix`
+      modulePrefix: 'rocks/'  // optional, end '/' is optional. # output: define('rocks/templates/app', ...)
     }))
     .pipe(gulp.dest('./dist/'))
 });

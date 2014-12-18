@@ -128,3 +128,52 @@ test('module name should be relative to moduleRoot', function(t) {
       name: 'helloworld'
     }));
 });
+
+test('modulePrefix option requires moduleRoot existence', function(t) {
+  t.plan(1);
+
+  gulp.src(filename)
+    .pipe(task({
+      modulePrefix: 'rocks/',
+      deps: ['jade'],
+      params: ['jade'],
+    }))
+    .pipe(expectStream(t, {
+      deps: ['jade'],
+      params: ['jade'],
+    }));
+});
+
+test('should prepend the modulePrefix in the module name defination', function(t) {
+  t.plan(1);
+
+  gulp.src(filename)
+    .pipe(task({
+      moduleRoot: 'fixtures/',
+      modulePrefix: 'rocks/',
+      deps: ['jade'],
+      params: ['jade'],
+    }))
+    .pipe(expectStream(t, {
+      deps: ['jade'],
+      params: ['jade'],
+      name: 'rocks/helloworld'
+    }));
+});
+
+test('should add trailing slash to modulePrefix if not existed in the module name defination', function(t) {
+  t.plan(1);
+
+  gulp.src(filename)
+    .pipe(task({
+      moduleRoot: 'fixtures/',
+      modulePrefix: 'rocks',
+      deps: ['jade'],
+      params: ['jade'],
+    }))
+    .pipe(expectStream(t, {
+      deps: ['jade'],
+      params: ['jade'],
+      name: 'rocks/helloworld'
+    }));
+});
