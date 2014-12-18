@@ -140,7 +140,8 @@ test('modulePrefix option requires moduleRoot existence', function(t) {
     }))
     .pipe(expectStream(t, {
       deps: ['jade'],
-      params: ['jade']
+      params: ['jade'],
+      name: null
     }));
 });
 
