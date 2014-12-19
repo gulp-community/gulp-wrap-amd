@@ -12,6 +12,10 @@ function compile(contents, opts){
   opts.name = null;
   if(typeof opts.moduleRoot === 'string'){
     opts.name = path.relative(opts.moduleRoot, opts.file.path).slice(0, -path.extname(opts.file.path).length);
+    if(opts.modulePrefix) {
+      var prefix = opts.modulePrefix.indexOf('/') > -1 ? opts.modulePrefix : opts.modulePrefix + '/';
+      opts.name = prefix + opts.name;
+    }
   }
 
   opts.contents = contents;
