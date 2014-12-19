@@ -104,7 +104,7 @@ test('should include module name if moduleRoot option is given', function(t) {
     .pipe(task({
       moduleRoot: './',
       deps: ['jade'],
-      params: ['jade'],
+      params: ['jade']
     }))
     .pipe(expectStream(t, {
       deps: ['jade'],
@@ -120,7 +120,7 @@ test('module name should be relative to moduleRoot', function(t) {
     .pipe(task({
       moduleRoot: 'fixtures/',
       deps: ['jade'],
-      params: ['jade'],
+      params: ['jade']
     }))
     .pipe(expectStream(t, {
       deps: ['jade'],
@@ -170,7 +170,7 @@ test('should add trailing slash to modulePrefix if not existed in the module nam
       moduleRoot: 'fixtures/',
       modulePrefix: 'rocks',
       deps: ['jade'],
-      params: ['jade'],
+      params: ['jade']
     }))
     .pipe(expectStream(t, {
       deps: ['jade'],
