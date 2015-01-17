@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.org/phated/gulp-wrap-amd.png?branch=master)](https://travis-ci.org/phated/gulp-wrap-amd)
+[![Travis Build Status](https://img.shields.io/travis/phated/gulp-wrap-amd.svg?branch=master&style=flat-square&label=travis)](https://travis-ci.org/phated/gulp-wrap-amd)
+[![Appveyor Build status](http://img.shields.io/appveyor/ci/phated/gulp-wrap-amd.svg?style=flat-square&label=appveyor)](https://ci.appveyor.com/project/phated/gulp-wrap-amd/branch/master)
 
 ## Information
 
