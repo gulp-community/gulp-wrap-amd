@@ -1,3 +1,4 @@
+/*jshint bitwise: false*/
 'use strict';
 
 var test = require('tap').test;
@@ -12,8 +13,6 @@ var _ = require('lodash');
 var filename = path.join(__dirname, './fixtures/helloworld.js');
 var exportFilename = path.join(__dirname, './fixtures/exports.js');
 var jst = fs.readFileSync(path.join(__dirname, '../templates/amd.jst'), 'utf-8');
-
-var expectedModuleId = fs.readFileSync(path.join(__dirname, './expected/helloworld.js'), 'utf-8');
 
 function expectStream(t, options){
   options = _.defaults(options || {}, {
@@ -192,7 +191,7 @@ test('does not have windows separaters in moduleId', function(t){
       params: ['jade']
     }))
     .pipe(through.obj(function(file, enc, cb){
-      t.equals(String(file.contents), expectedModuleId);
+      t.equals(!!~String(file.contents).indexOf("rocks/helloworld"), true);
       cb();
     }));
 });
