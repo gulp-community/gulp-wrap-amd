@@ -7,7 +7,6 @@ var globs = [
   '**/*.js',
   '!node_modules/**',
   '!test/fixtures/**',
-  '!test/expected/**',
   '!template.js'
 ];
 
