@@ -24,7 +24,8 @@ function expectStream(t, options){
   });
   return through.obj(function(file, enc, cb){
     options.contents = fs.readFileSync(file.path, 'utf-8');
-    var expected = _.template(jst, options);
+    var compiled = _.template(jst);
+    var expected = compiled(options);
     t.equals(expected, String(file.contents));
     cb();
   });
