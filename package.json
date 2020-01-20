@@ -17,7 +17,7 @@
   },
   "main": "index.js",
   "engines": {
-    "node": ">= 2.0"
+    "node": ">= 0.10"
   },
   "scripts": {
     "test": "gulp jshint && tap ./test/*.js",
