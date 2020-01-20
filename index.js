@@ -46,7 +46,7 @@ module.exports = function(options){
     }
 
     if(chunk.isBuffer()){
-      chunk.contents = new Buffer.from(compile(String(chunk.contents), opts));
+      chunk.contents = Buffer.from(compile(String(chunk.contents), opts));
     }
 
     this.push(chunk);
