@@ -1,31 +1,27 @@
 ;(function() {
   var undefined;
 
-  var objectTypes = {
-    'function': true,
-    'object': true
+  var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
+
+  var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
+
+  var root = freeGlobal || freeSelf || Function('return this')();
+
+  var freeExports = typeof exports == 'object' && exports && !exports.nodeType && exports;
+
+  var freeModule = freeExports && typeof module == 'object' && module && !module.nodeType && module;
+
+  var _ = root._ || {};
+
+  /*----------------------------------------------------------------------------*/
+
+  var templates = {
+    'amd': {}
   };
 
-  var root = (objectTypes[typeof window] && window) || this;
-
-  var freeExports = objectTypes[typeof exports] && exports && !exports.nodeType && exports;
-
-  var freeModule = objectTypes[typeof module] && module && !module.nodeType && module
-
-  var moduleExports = freeModule && freeModule.exports === freeExports && freeExports;
-
-  var freeGlobal = objectTypes[typeof global] && global;
-  if (freeGlobal && (freeGlobal.global === freeGlobal || freeGlobal.window === freeGlobal)) {
-    root = freeGlobal;
-  }
-
-  var _ = root._;
-
-  var templates = {};
-
-  templates['amd'] = function(obj) {
+  templates['amd'] =   function(obj) {
     obj || (obj = {});
-    var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+    var __t, __p = '', __j = Array.prototype.join;
     function print() { __p += __j.call(arguments, '') }
     with (obj) {
     __p += 'define(' +
@@ -34,28 +30,29 @@
     ((__t = ( deps ? JSON.stringify(deps) + ',' : '' )) == null ? '' : __t) +
     'function(' +
     ((__t = ( (!deps ? ['require', 'exports', 'module'] : params || '').toString() )) == null ? '' : __t) +
-    '){\n';
+    '){\r\n';
      if(exports){
-    __p += '\n' +
+    __p += '\r\n' +
     ((__t = ( contents )) == null ? '' : __t) +
-    '\nreturn ' +
+    '\r\nreturn ' +
     ((__t = ( exports )) == null ? '' : __t) +
-    ';\n';
+    ';\r\n';
      } else {
-    __p += '\nreturn ' +
+    __p += '\r\nreturn ' +
     ((__t = ( contents )) == null ? '' : __t) +
-    ';\n';
+    ';\r\n';
      }
-    __p += '\n});\n';
+    __p += '\r\n});\r\n';
 
     }
     return __p
   };
 
-  if (freeExports && freeModule) {
+  /*----------------------------------------------------------------------------*/
+
+  if (freeModule) {
     _ = require('lodash');
-    if (moduleExports) {
-      (freeModule.exports = templates).templates = templates;
-    }
+    (freeModule.exports = templates).templates = templates;
+    freeExports.templates = templates;
   }
 }.call(this));

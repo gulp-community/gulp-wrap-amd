@@ -11,7 +11,7 @@ var globs = [
 ];
 
 gulp.task('jshint', function(){
-  gulp.src(globs)
+  return gulp.src(globs)
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter());
 });

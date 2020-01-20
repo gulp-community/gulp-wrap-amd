@@ -4,7 +4,7 @@ var through = require('through2');
 var clone = require('lodash').clone;
 var defaults = require('lodash').defaults;
 var path = require('path');
-var PluginError = require('gulp-util').PluginError;
+var PluginError = require('plugin-error');
 
 var tmpl = require('./template').amd;
 
@@ -37,19 +37,19 @@ function getOptions(file, opts){
 
 module.exports = function(options){
 
-  function WrapAMD(file, enc, cb){
-    var opts = getOptions(file, options);
+  function WrapAMD(chunk, enc, cb){
+    var opts = getOptions(chunk, options);
 
-    if(file.isStream()){
+    if(chunk.isStream()){
       this.emit('error', new PluginError('gulp-wrap-amd', 'Streaming not supported'));
       return cb();
     }
 
-    if(file.isBuffer()){
-      file.contents = new Buffer(compile(String(file.contents), opts));
+    if(chunk.isBuffer()){
+      chunk.contents = new Buffer.from(compile(String(chunk.contents), opts));
     }
 
-    this.push(file);
+    this.push(chunk);
     cb();
   }
 
