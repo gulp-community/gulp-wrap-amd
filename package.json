@@ -1,6 +1,6 @@
 {
   "name": "gulp-wrap-amd",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "description": "Wrap files with an AMD wrapper",
   "keywords": [
     "gulpplugin",
@@ -9,10 +9,17 @@
   ],
   "repository": "https://github.com/phated/gulp-wrap-amd.git",
   "author": "Blaine Bublitz <blaine@iceddev.com>",
+  "maintainers": [
+    {
+      "name": "Paulo Andrade",
+      "url": "https://github.com/prma85"
+    }
+  ],
   "dependencies": {
-    "gulp-util": "^3.0.4",
-    "lodash": "^3.5.0",
-    "through2": "^0.6.3"
+    "lodash": "^4.17.20",
+    "plugin-error": "^1.0.1",
+    "through2": "^4.0.2",
+    "vinyl": "^2.2.1"
   },
   "main": "index.js",
   "engines": {
@@ -20,12 +27,12 @@
   },
   "scripts": {
     "test": "gulp jshint && tap ./test/*.js",
-    "compile": "lodash template=./templates/*.jst exports=node -o template.js -d"
+    "compile": "npx lodash-cli template=./templates/*.jst exports=node -o template.js -d"
   },
   "devDependencies": {
-    "tap": "^0.7.1",
-    "lodash-cli": "^3.5.0",
-    "gulp": "^3.8.11",
-    "gulp-jshint": "^1.9.4"
+    "gulp": "^4.0.2",
+    "gulp-jshint": "^2.1.0",
+    "jshint": "^2.12.0",
+    "tap": "^14.10.8"
   }
 }

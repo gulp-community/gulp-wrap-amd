@@ -13,16 +13,26 @@
 </tr>
 <tr>
 <td>Node Version</td>
-<td>≥ 0.10</td>
+<td>≥ 8.0</td>
 </tr>
 </table>
+
+## Installation
+
+In your project run a npm install command:
+
+`npm install gulp-wrap-amd --save-dev`
+
+or 
+
+`yarn add gulp-wrap-amd --dev`
 
 ## Usage
 
 Wrap the contents of the file, AMD module will return the entire contents
 
 ```javascript
-var wrap = require('gulp-wrap-amd');
+const wrap = require('gulp-wrap-amd');
 
 gulp.task('wrap', function() {
   gulp.src('./lib/*.js')
@@ -34,7 +44,7 @@ gulp.task('wrap', function() {
 Wrap the contents, with custom dependencies, callback params, and variable to return (exports)
 
 ```javascript
-var wrap = require('gulp-wrap-amd');
+const wrap = require('gulp-wrap-amd');
 
 gulp.task('wrap', function() {
   gulp.src('./lib/*.js')
@@ -52,7 +62,7 @@ gulp.task('wrap', function() {
 Custom module name definition with optional prefix value
 
 ```javascript
-var wrap = require('gulp-wrap-amd');
+const wrap = require('gulp-wrap-amd');
 
 gulp.task('wrap', function() {
   gulp.src('client/app/templates/app.hbs')

@@ -1,19 +1,19 @@
 'use strict';
 
-var test = require('tap').test;
+const test = require('tap').test;
 
-var task = require('../');
+const task = require('../');
 
-var path = require('path');
-var fs = require('fs');
-var File = require('gulp-util').File;
-var PluginError = require('gulp-util').PluginError;
+const path = require('path');
+const fs = require('fs');
+const Vinyl = require('vinyl');
+const PluginError = require('plugin-error');
 
-var filePath = path.join(__dirname, 'fixtures', 'helloworld.js');
-var base = path.join(__dirname, 'fixtures');
-var cwd = __dirname;
+const filePath = path.join(__dirname, 'fixtures', 'helloworld.js');
+const base = path.join(__dirname, 'fixtures');
+const cwd = __dirname;
 
-var file = new File({
+const file = new Vinyl({
   path: filePath,
   base: base,
   cwd: cwd,
@@ -21,7 +21,7 @@ var file = new File({
 });
 
 test('should error if contents is a stream', function(t){
-  var stream = task();
+  const stream = task();
   stream.on('error', function(err){
     t.ok(err instanceof PluginError, 'not an instance of PluginError');
     t.end();
