@@ -30,19 +30,19 @@
     ((__t = ( deps ? JSON.stringify(deps) + ',' : '' )) == null ? '' : __t) +
     'function(' +
     ((__t = ( (!deps ? ['require', 'exports', 'module'] : params || '').toString() )) == null ? '' : __t) +
-    '){\r\n';
+    '){\n';
      if(exports){
-    __p += '\r\n' +
+    __p += '\n' +
     ((__t = ( contents )) == null ? '' : __t) +
-    '\r\nreturn ' +
+    '\nreturn ' +
     ((__t = ( exports )) == null ? '' : __t) +
-    ';\r\n';
+    ';\n';
      } else {
-    __p += '\r\nreturn ' +
+    __p += '\nreturn ' +
     ((__t = ( contents )) == null ? '' : __t) +
-    ';\r\n';
+    ';\n';
      }
-    __p += '\r\n});\r\n';
+    __p += '\n});\n';
 
     }
     return __p
