@@ -9,6 +9,12 @@
   ],
   "repository": "https://github.com/phated/gulp-wrap-amd.git",
   "author": "Blaine Bublitz <blaine@iceddev.com>",
+  "maintainers": [
+    {
+      "name": "Paulo Andrade",
+      "url": "https://github.com/prma85"
+    }
+  ],
   "dependencies": {
     "lodash": "^4.17.20",
     "plugin-error": "^1.0.1",
@@ -27,6 +33,6 @@
     "gulp": "^4.0.2",
     "gulp-jshint": "^2.1.0",
     "jshint": "^2.12.0",
-    "tap": "^0.7.1"
+    "tap": "^14.10.8"
   }
 }

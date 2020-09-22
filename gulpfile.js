@@ -1,9 +1,9 @@
 'use strict';
 
-var gulp = require('gulp');
-var jshint = require('gulp-jshint');
+const gulp = require('gulp');
+const jshint = require('gulp-jshint');
 
-var globs = [
+const globs = [
   '**/*.js',
   '!node_modules/**',
   '!test/fixtures/**',
